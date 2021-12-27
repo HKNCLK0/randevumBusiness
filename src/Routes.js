@@ -7,12 +7,18 @@ import {
   NotFound,
   PhotoGallery,
   Support,
+  Comments,
+  Register,
 } from "./screens";
 
 export const routes = [
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/dashboard",
@@ -37,6 +43,10 @@ export const routes = [
   {
     path: "/dashboard/support",
     element: <Support />,
+  },
+  {
+    path: "/dashboard/comments",
+    element: <Comments />,
   },
   {
     path: "*",

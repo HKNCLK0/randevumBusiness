@@ -1,11 +1,30 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
-    alert("asd");
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    axios
+      .post(`${API_URL}/auth/business-login`, {
+        email,
+        password,
+      })
+      .then((res) => {
+        if (res.data.business) {
+          sessionStorage.setItem("token", res.data.business.token);
+          navigate("/dashboard");
+        } else {
+          alert("Please Check Email or Password");
+        }
+      })
+      .catch((err) => console.log(err));
   };
+  useEffect(() => {}, []);
   return (
     <>
       <main className="py-16 font-Montserrat flex flex-col gap-16 items-center">
@@ -40,7 +59,7 @@ const Login = () => {
             />
           </div>
           <button
-            onClick={(e) => handleLogin(e)}
+            onClick={() => handleLogin()}
             disabled={!email || !password}
             className={`${
               !email || !password
