@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../config";
 
+//TODO:Mailin Gideceği E-Posta Açılacak
 const Support = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
