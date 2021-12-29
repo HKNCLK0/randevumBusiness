@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/UI/Button";
-import * as didJWT from "did-jwt";
 
 //TODO:Tüm token ile girilen yerlere API'dan doğrulama yapılacak
 const Dashboard = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = sessionStorage.getItem("token");
-    const decoded = didJWT.decodeJWT(token);
-    console.log(decoded.payload);
     if (!token) {
       navigate("/");
     }

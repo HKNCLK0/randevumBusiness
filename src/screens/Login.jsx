@@ -10,9 +10,9 @@ const Login = () => {
   const navigate = useNavigate();
   const handleLogin = () => {
     axios
-      .post(`${API_URL}/auth/business-login`, {
-        email,
-        password,
+      .post(`${API_URL}/businesses/login`, {
+        businessEmail: email,
+        businessPassword: password,
       })
       .then((res) => {
         if (res.data.business) {

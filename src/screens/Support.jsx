@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { API_URL } from "../config";
 
 const Support = () => {
   const [name, setName] = useState("");
@@ -13,7 +15,26 @@ const Support = () => {
   }, []);
 
   const handleSubmit = () => {
-    console.log({ name, surname, email, phone, selectedSubject, problemText });
+    axios
+      .post(`${API_URL}/support`, {
+        name,
+        surname,
+        email,
+        phone,
+        selectedSubject,
+        problemText,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.statusText === "OK") {
+          alert("Support Request Send");
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        alert("Support Request Error");
+        window.location.reload();
+      });
   };
   return (
     <>

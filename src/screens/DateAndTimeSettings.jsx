@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
+import Footer from "../components/Footer";
 
 const DateAndTimeSettings = () => {
   const [selectedDay, setSelectedDay] = useState([]);
@@ -76,6 +77,7 @@ const DateAndTimeSettings = () => {
           </button>
         </div>
       </main>
+      <Footer />
     </>
   );
 };
