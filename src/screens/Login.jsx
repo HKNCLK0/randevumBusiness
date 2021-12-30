@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "../config";
 
 const Login = () => {
+  const token = sessionStorage.getItem("token");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,7 +25,11 @@ const Login = () => {
       })
       .catch((err) => console.log(err));
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, []);
   return (
     <>
       <main className="py-16 font-Montserrat flex flex-col gap-16 items-center">

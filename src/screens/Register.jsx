@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
   const [businessName, setBusinessName] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [email, setEmail] = useState("");
@@ -23,6 +24,9 @@ const Register = () => {
       .then((category) => setCategories(category.data));
   }, []);
   useEffect(() => {
+    if (token) {
+      navigate("/dashboard");
+    }
     setFilteredIlce(İlce.filter((a) => a.il_id === selectedCountry));
   }, [selectedCountry]);
 
