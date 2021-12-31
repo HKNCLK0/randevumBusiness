@@ -12,7 +12,7 @@ const Footer = () => {
         Destek
       </Link>
       <h1 className="font-semibold opacity-60 text-sm text-textColor">
-        Randevum © {date.getFullYear()} || All Right Reserved
+        Randevum Business © {date.getFullYear()} || All Right Reserved
       </h1>
     </footer>
   );
