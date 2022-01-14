@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
+import { Loader, Footer } from "../components";
 import { API_URL } from "../config";
-import Footer from "../components/Footer";
 
 const Login = () => {
   const token = sessionStorage.getItem("token");

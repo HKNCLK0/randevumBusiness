@@ -1,7 +1,7 @@
 import axios from "axios";
 import { decodeJWT } from "did-jwt";
 import React, { useEffect, useState } from "react";
-import Footer from "../components/Footer";
+import { Footer } from "../components";
 import { API_URL } from "../config";
 
 const Meets = () => {

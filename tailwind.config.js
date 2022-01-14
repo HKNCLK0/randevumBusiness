@@ -5,7 +5,7 @@ module.exports = {
       colors: {
         background: "#222020",
         boxColor: "#2D2D2D",
-        borderAndOtherRed: "#FF6148",
+        borderAndOtherRed: "#ff4757",
         textColor: "#F0FFFF",
         disabledColor: "#6D6D6D",
         buttonColor: "#a29bfe",
