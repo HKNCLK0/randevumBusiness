@@ -91,14 +91,19 @@ const DateAndTimeSettings = () => {
                 onChange={(e) => setInputTime(e.target.value)}
                 className="px-2 font-semibold py-1 border-2 border-transparent outline-none transition-colors duration-300 hover:border-borderAndOtherRed focus:border-borderAndOtherRed rounded-lg"
               />
-              <div className="grid grid-cols-10 gap-4 justify-center">
+              <div className="grid grid-cols-10 gap-4">
                 {selectedTime.map((time, index) => (
-                  <div
-                    className="flex items-center justify-center px-4 py-2 rounded-lg text-boxColor bg-textColor font-semibold border-2 border-transparent"
+                  <button
+                    onClick={() =>
+                      setSelectedTime(
+                        selectedTime.filter((item) => item !== time)
+                      )
+                    }
+                    className="flex items-center justify-center px-4 py-2 rounded-lg text-boxColor bg-textColor font-semibold border-2 border-transparent transition-colors duration-300 hover:text-textColor hover:border-borderAndOtherRed hover:bg-transparent"
                     key={index}
                   >
                     {time}
-                  </div>
+                  </button>
                 ))}
               </div>
               <button
