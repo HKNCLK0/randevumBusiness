@@ -8,6 +8,7 @@ import DateAndTimeSettings from "./DateAndTimeSettings";
 import Support from "./Support";
 import Comments from "./Comments";
 import Register from "./Register";
+import Subscription from "./Subscription";
 
 export {
   Login,
@@ -20,4 +21,5 @@ export {
   DateAndTimeSettings,
   Support,
   Comments,
+  Subscription,
 };

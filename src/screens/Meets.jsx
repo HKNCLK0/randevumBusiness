@@ -2,6 +2,7 @@ import axios from "axios";
 import { decodeJWT } from "did-jwt";
 import React, { useEffect, useState } from "react";
 import { Footer } from "../components";
+import { Box } from "../components/UI";
 import { API_URL } from "../config";
 
 const Meets = () => {
@@ -16,8 +17,8 @@ const Meets = () => {
   return (
     <>
       <main className="py-16 font-Montserrat flex flex-col gap-16 items-center">
-        <div className="w-11/12 gap-y-8 flex items-center justify-center flex-col rounded-xl bg-boxColor py-8">
-          <h1 className="text-textColor font-bold text-xl">Randevular</h1>
+        <h1 className="text-textColor font-bold text-xl">Randevular</h1>
+        <Box>
           {data.length !== 0 ? (
             <div className="grid grid-cols-8 gap-x-4 px-16">
               {data.map((meet) => (
@@ -44,7 +45,7 @@ const Meets = () => {
               Oluşturulan Randevu Bulunamadı
             </h1>
           )}
-        </div>
+        </Box>
       </main>
       <Footer />
     </>

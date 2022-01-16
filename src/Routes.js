@@ -9,6 +9,7 @@ import {
   Support,
   Comments,
   Register,
+  Subscription,
 } from "./screens";
 
 export const routes = [
@@ -47,6 +48,10 @@ export const routes = [
   {
     path: "/dashboard/comments",
     element: <Comments />,
+  },
+  {
+    path: "/dashboard/subscription",
+    element: <Subscription />,
   },
   {
     path: "*",

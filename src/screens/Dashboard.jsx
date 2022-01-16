@@ -26,8 +26,11 @@ const Dashboard = () => {
         </div>
         <div className="w-11/12 h-full gap-4 grid grid-cols-1 grid-rows-3 bg-boxColor p-4 rounded-xl">
           <div className="grid grid-cols-3 grid-rows-1 gap-4">
-            <Button className="col-span-2" to="/dashboard/business-settings">
+            <Button to="/dashboard/business-settings">
               <h1 className="text-boxColor font-bold">İşletme Ayarları</h1>
+            </Button>
+            <Button to="/dashboard/subscription">
+              <h1 className="text-boxColor font-bold">Abonelik</h1>
             </Button>
             <Button to="/dashboard/comments">
               <h1 className="text-boxColor font-bold">Değerlendirmeler</h1>
