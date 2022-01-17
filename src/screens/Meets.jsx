@@ -5,6 +5,8 @@ import { Footer } from "../components";
 import { Box } from "../components/UI";
 import { API_URL } from "../config";
 
+//TODO:User Data İçine Yazılacak
+
 const Meets = () => {
   const token = sessionStorage.getItem("token");
   const businessID = decodeJWT(token);
@@ -14,6 +16,7 @@ const Meets = () => {
       .get(`${API_URL}/meets/business/${businessID.payload.id}`)
       .then((res) => setData(res.data));
   }, []);
+  console.log(data);
   return (
     <>
       <main className="py-16 font-Montserrat flex flex-col gap-16 items-center">

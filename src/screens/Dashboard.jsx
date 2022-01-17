@@ -18,9 +18,12 @@ const Dashboard = () => {
   return (
     <>
       <main className="flex flex-col h-[100vh] items-center py-12 gap-6 font-Montserrat">
-        <div className="flex gap-16">
+        <div className="flex relative justify-center items-center gap-16 w-full">
           <h1 className="text-textColor text-2xl font-bold">Yönetim Paneli</h1>
-          <button onClick={() => handleLogout()} className="bg-red-400">
+          <button
+            onClick={() => handleLogout()}
+            className="text-textColor right-16 absolute font-semibold border-2 border-borderAndOtherRed px-4 py-2 rounded-lg transition-colors duration-300 hover:text-background hover:bg-textColor hover:border-transparent"
+          >
             Çıkış Yap
           </button>
         </div>
