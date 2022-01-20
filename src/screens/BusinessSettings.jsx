@@ -1,10 +1,13 @@
 import React from "react";
+import { Box, MainContainer } from "../components/UI";
 
 const BusinessSettings = () => {
   return (
-    <div>
-      <h1 className="text-textColor">Business Settings</h1>
-    </div>
+    <>
+      <MainContainer title="İşletme Ayarları">
+        <Box></Box>
+      </MainContainer>
+    </>
   );
 };
 

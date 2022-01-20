@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "../components/UI";
+import { Box, MainContainer } from "../components/UI";
 import { SubscriptionCards } from "../components/Subscritption";
 import axios from "axios";
 import { API_URL } from "../config";
 import { decodeJWT } from "did-jwt";
+import { Footer } from "../components";
 
 //TODO:Kartların Navigasyonları Yapılacak
 
@@ -20,7 +21,7 @@ const Subscription = () => {
   }, []);
   return (
     <>
-      <main className="py-16 font-Montserrat flex flex-col gap-16 items-center">
+      <MainContainer>
         <div className="flex w-3/4 flex-col gap-4 items-center justify-center">
           <h1 className="text-textColor font-bold">Subscription</h1>
           <Box>
@@ -59,7 +60,8 @@ const Subscription = () => {
             </div>
           </Box>
         </div>
-      </main>
+        <Footer />
+      </MainContainer>
     </>
   );
 };

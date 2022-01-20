@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import fire from "../firebase";
 import { decodeJWT } from "did-jwt";
+import { Footer } from "../components";
 
 //TODO:Amazon AWS Kurulacak
 const PhotoGallery = () => {
@@ -37,6 +38,7 @@ const PhotoGallery = () => {
             Yükle
           </button>
         </div>
+        <Footer />
       </main>
     </>
   );

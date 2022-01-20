@@ -2,7 +2,7 @@ import axios from "axios";
 import { decodeJWT } from "did-jwt";
 import React, { useEffect, useState } from "react";
 import { Footer } from "../components";
-import { Box } from "../components/UI";
+import { Box, MainContainer } from "../components/UI";
 import { API_URL } from "../config";
 
 //TODO:User Data İçine Yazılacak
@@ -16,11 +16,9 @@ const Meets = () => {
       .get(`${API_URL}/meets/business/${businessID.payload.id}`)
       .then((res) => setData(res.data));
   }, []);
-  console.log(data);
   return (
     <>
-      <main className="py-16 font-Montserrat flex flex-col gap-16 items-center">
-        <h1 className="text-textColor font-bold text-xl">Randevular</h1>
+      <MainContainer title="Randevular">
         <Box>
           {data.length !== 0 ? (
             <div className="grid grid-cols-8 gap-x-4 px-16">
@@ -49,7 +47,7 @@ const Meets = () => {
             </h1>
           )}
         </Box>
-      </main>
+      </MainContainer>
       <Footer />
     </>
   );

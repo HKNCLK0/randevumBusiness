@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../config";
 import { decodeJWT } from "did-jwt";
+import { Footer } from "../components";
 
 const Comments = () => {
   const [data, setData] = useState([]);
@@ -28,6 +29,7 @@ const Comments = () => {
             ))}
           </div>
         </div>
+        <Footer />
       </main>
     </>
   );
