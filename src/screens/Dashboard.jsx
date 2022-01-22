@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/UI/Button";
 
 //TODO:Tüm token ile girilen yerlere API'dan doğrulama yapılacak
+//TODO:Masa Ayarları Sayfası İşletmelere Göre Düzenlenebilir Olacak
 const Dashboard = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -46,7 +47,7 @@ const Dashboard = () => {
             <Button to="/dashboard/photo-gallery">
               <h1 className="text-boxColor font-bold">Resim Galerisi</h1>
             </Button>
-            <Button to="">
+            <Button to="/dashboard/table-settings">
               <h1 className="text-boxColor font-bold">Masa Ayarları</h1>
             </Button>
           </div>

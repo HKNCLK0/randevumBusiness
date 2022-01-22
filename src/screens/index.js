@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard";
 import BusinessSettings from "./BusinessSettings";
 import Meets from "./Meets";
 import PhotoGallery from "./PhotoGallery";
+import TableSettings from "./TableSettings";
 import DateAndTimeSettings from "./DateAndTimeSettings";
 import Support from "./Support";
 import Comments from "./Comments";
@@ -17,6 +18,7 @@ export {
   Dashboard,
   Meets,
   BusinessSettings,
+  TableSettings,
   PhotoGallery,
   DateAndTimeSettings,
   Support,

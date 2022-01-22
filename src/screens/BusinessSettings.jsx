@@ -1,4 +1,5 @@
 import React from "react";
+import { Footer } from "../components";
 import { Box, MainContainer } from "../components/UI";
 
 const BusinessSettings = () => {
@@ -7,6 +8,7 @@ const BusinessSettings = () => {
       <MainContainer title="İşletme Ayarları">
         <Box></Box>
       </MainContainer>
+      <Footer />
     </>
   );
 };

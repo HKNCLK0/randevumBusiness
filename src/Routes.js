@@ -10,6 +10,7 @@ import {
   Comments,
   Register,
   Subscription,
+  TableSettings,
 } from "./screens";
 
 export const routes = [
@@ -40,6 +41,10 @@ export const routes = [
   {
     path: "/dashboard/photo-gallery",
     element: <PhotoGallery />,
+  },
+  {
+    path: "/dashboard/table-settings",
+    element: <TableSettings />,
   },
   {
     path: "/dashboard/support",
