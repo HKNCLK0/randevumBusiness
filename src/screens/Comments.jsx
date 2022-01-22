@@ -23,7 +23,11 @@ const Comments = () => {
               key={comment._id}
               className="w-3/4 px-24 py-4 rounded-lg border-2 border-borderAndOtherRed border-opacity-50 transition-colors hover:border-opacity-100 duration-200"
             >
-              <h1 className="text-textColor">{comment.commentText}</h1>
+              <h1 className="text-textColor font-semibold">
+                {comment.commentText}
+              </h1>
+              <h1 className="text-textColor">{comment.createdAt}</h1>
+              <h1 className="text-textColor">{comment.commentPoint}</h1>
             </div>
           ))}
         </Box>
