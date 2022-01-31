@@ -1,51 +1,57 @@
 import React, { useState } from "react";
 import moment from "moment";
+import "moment/locale/tr";
 import { Footer } from "../components";
 import { Box, MainContainer } from "../components/UI";
+import axios from "axios";
+import { API_URL } from "../config";
+import { decodeJWT } from "did-jwt";
 
 const DateAndTimeSettings = () => {
+  const token = sessionStorage.getItem("token");
+
+  const business = decodeJWT(token);
+
   const [selectedDay, setSelectedDay] = useState([]);
   const [inputTime, setInputTime] = useState("");
   const [selectedTime, setSelectedTime] = useState([]);
-  const days = [
-    "Pazartesi",
-    "Salı",
-    "Çarşamba",
-    "Perşembe",
-    "Cuma",
-    "Cumartesi",
-    "Sunday",
-  ];
-  const handleSubmit = () => {
-    alert(selectedDay);
+
+  var days = [];
+
+  const handleSetMeetDates = () => {
+    axios
+      .put(`${API_URL}/businesses/setMeetsDates`, {
+        businessID: business.payload.id,
+        meetDates: selectedDay,
+      })
+      .then((res) => console.log(res.data));
   };
-  /*const day = 0;
-  console.log(moment().day(day).format("dddd"));
-  */
-  function getDaysArrayByMonth() {
-    var daysInMonth = moment().daysInMonth();
-    var arrDays = [];
 
-    while (daysInMonth) {
-      var current = moment().date(daysInMonth);
-      arrDays.push(current);
-      daysInMonth--;
+  const handleSetMeetTimes = () => {
+    axios
+      .put(`${API_URL}/businesses/setMeetsTimes`, {
+        businessID: business.payload.id,
+        meetTimes: selectedTime,
+      })
+      .then((res) => console.log(res.data));
+  };
+
+  function getCurrentWeek(days) {
+    var currentDate = moment();
+
+    var weekStart = currentDate.clone().startOf("isoWeek");
+    var weekEnd = currentDate.clone().endOf("isoWeek");
+
+    for (var i = 0; i <= 6; i++) {
+      days.push(moment(weekStart).add(i, "days").format("DD MMMM dddd"));
     }
-
-    var d = [];
-    var schedule = arrDays;
-    schedule.forEach((item) => {
-      d.push(item.format("dddd"));
-    });
-    console.log(d.filter((item) => item === "Tuesday"));
   }
-
-  getDaysArrayByMonth();
+  getCurrentWeek(days);
 
   return (
     <>
       <MainContainer title="Date And Time Settings">
-        <Box>
+        <Box className="w-10/12">
           <h1 className="text-textColor font-semibold">
             İşletmenizin Açık Olduğu Günleri Seçiniz
           </h1>
@@ -62,8 +68,8 @@ const DateAndTimeSettings = () => {
                 }}
                 className={`${
                   selectedDay.includes(day)
-                    ? "border-2 border-transparent px-4 py-2 rounded-lg text-boxColor bg-textColor duration-300 font-semibold"
-                    : "border-2 border-borderAndOtherRed px-4 py-2 rounded-lg hover:border-transparent hover:bg-textColor hover:text-boxColor duration-300 font-semibold"
+                    ? "border-2 border-transparent px-2 py-1 rounded-lg text-boxColor bg-textColor duration-300 font-semibold"
+                    : "border-2 border-borderAndOtherRed px-2 py-1 rounded-lg hover:border-transparent hover:bg-textColor hover:text-boxColor duration-300 font-semibold"
                 }`}
               >
                 {day}
@@ -73,18 +79,28 @@ const DateAndTimeSettings = () => {
           <button
             disabled={selectedDay.length === 0}
             className="border-2 disabled:bg-disabledColor disabled:text-textColor disabled:border-transparent disabled:duration-200 disabled:transition-colors border-borderAndOtherRed px-6 py-2 rounded-lg text-textColor transition-colors duration-200 hover:bg-textColor hover:text-boxColor hover:border-transparent font-semibold"
-            onClick={() => handleSubmit()}
+            onClick={() => handleSetMeetDates()}
           >
             Kaydet
           </button>
         </Box>
         <Box>
-          <h1 className="text-textColor font-semibold">
-            İşletmenize Uygun Randevu Saatlerini Yazın
-          </h1>
+          <div className="text-center">
+            <h1 className="text-textColor font-semibold">
+              İşletmenize Uygun Randevu Saatlerini Yazın
+            </h1>
+            <p className="text-sm text-textColor font-medium">
+              Öncelikle Saat Bilgisi Girin, Ekle Butonuna Basın. Son Olarak
+              Ekledğiniz Saatleri Kaydedin!
+            </p>
+          </div>
           <div className="flex flex-col gap-4 w-full items-center">
             <input
               type="time"
+              onKeyPress={(e) =>
+                e.key == "Enter" &&
+                setSelectedTime((oncekiState) => [...oncekiState, inputTime])
+              }
               value={inputTime}
               onChange={(e) => setInputTime(e.target.value)}
               className="px-2 font-semibold py-1 border-2 border-transparent outline-none transition-colors duration-300 hover:border-borderAndOtherRed focus:border-borderAndOtherRed rounded-lg"
@@ -112,6 +128,13 @@ const DateAndTimeSettings = () => {
               className="border-2 disabled:bg-disabledColor disabled:text-textColor disabled:border-transparent disabled:duration-200 disabled:transition-colors border-borderAndOtherRed px-6 py-2 rounded-lg text-textColor transition-colors duration-200 hover:bg-textColor hover:text-boxColor hover:border-transparent font-semibold"
             >
               Ekle
+            </button>
+            <button
+              disabled={inputTime.length === 0}
+              onClick={() => handleSetMeetTimes()}
+              className="border-2 disabled:bg-disabledColor disabled:text-textColor disabled:border-transparent disabled:duration-200 disabled:transition-colors border-borderAndOtherRed px-6 py-2 rounded-lg text-textColor transition-colors duration-200 hover:bg-textColor hover:text-boxColor hover:border-transparent font-semibold"
+            >
+              Kaydet
             </button>
           </div>
         </Box>
