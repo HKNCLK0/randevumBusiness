@@ -10,6 +10,7 @@ import Support from "./Support";
 import Comments from "./Comments";
 import Register from "./Register";
 import Subscription from "./Subscription";
+import PaymentPage from "./PaymentPage";
 
 export {
   Login,
@@ -24,4 +25,5 @@ export {
   Support,
   Comments,
   Subscription,
+  PaymentPage,
 };

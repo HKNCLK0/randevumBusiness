@@ -11,6 +11,7 @@ import {
   Register,
   Subscription,
   TableSettings,
+  PaymentPage,
 } from "./screens";
 
 export const routes = [
@@ -61,5 +62,9 @@ export const routes = [
   {
     path: "*",
     element: <NotFound />,
+  },
+  {
+    path: "/dashboard/payment",
+    element: <PaymentPage />,
   },
 ];
