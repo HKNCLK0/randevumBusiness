@@ -12,6 +12,7 @@ import {
   Subscription,
   TableSettings,
   PaymentPage,
+  Failed,
 } from "./screens";
 
 export const routes = [
@@ -66,5 +67,9 @@ export const routes = [
   {
     path: "/dashboard/payment",
     element: <PaymentPage />,
+  },
+  {
+    path: "/failed",
+    element: <Failed />,
   },
 ];

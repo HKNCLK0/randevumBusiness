@@ -2,18 +2,24 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/UI/Button";
 
+import { useCookies } from "react-cookie";
+
 //TODO:Tüm token ile girilen yerlere API'dan doğrulama yapılacak
 //TODO:Masa Ayarları Sayfası İşletmelere Göre Düzenlenebilir Olacak
 const Dashboard = () => {
   const navigate = useNavigate();
+
+  const [cookie, setCookies, removeCookie] = useCookies(["token"]);
+
+  const token = cookie.token;
+
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
     if (!token) {
       navigate("/");
     }
   }, []);
   const handleLogout = () => {
-    sessionStorage.removeItem("token");
+    removeCookie("token");
     window.location.reload();
   };
   return (

@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import fire from "../firebase";
-import { decodeJWT } from "did-jwt";
 import { Footer } from "../components";
+import { useCookies } from "react-cookie";
 
 //TODO:Amazon AWS Kurulacak
 const PhotoGallery = () => {
   const storage = fire.storage();
-  const token = sessionStorage.getItem("token");
-  const business = decodeJWT(token);
+
+  const [cookie, setCookies] = useCookies(["token"]);
+
   const [file, setFile] = useState();
   const [images, setImages] = useState([]);
 
   const handleUpload = (e) => {
+    /*
     e.preventDefault();
     const ref = storage.ref(
       `/businessImages/${business.payload.id}/${file.name}`
@@ -23,6 +25,7 @@ const PhotoGallery = () => {
         setImages((prevImages) => [...prevImages, url]);
       });
     });
+  */
   };
   return (
     <>

@@ -4,12 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { Loader, Footer } from "../components";
 import { API_URL } from "../config";
 
+import { useCookies } from "react-cookie";
+
 const Login = () => {
   const token = sessionStorage.getItem("token");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [cookie, setCookies] = useCookies(["token"]);
 
   const navigate = useNavigate();
   const handleLogin = () => {
@@ -20,8 +24,8 @@ const Login = () => {
         businessPassword: password,
       })
       .then((res) => {
-        if (res.data.business) {
-          sessionStorage.setItem("token", res.data.business.token);
+        if (res.data.token) {
+          setCookies("token", res.data.token);
           navigate("/dashboard");
         } else {
           alert("Please Check Email or Password");

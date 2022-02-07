@@ -1,17 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../config";
-import { decodeJWT } from "did-jwt";
+
 import { Footer } from "../components";
 import { Box, MainContainer } from "../components/UI";
+import { useCookies } from "react-cookie";
 
 const Comments = () => {
   const [data, setData] = useState([]);
-  const token = sessionStorage.getItem("token");
-  const businessID = decodeJWT(token);
+
+  const [cookie, setCookies] = useCookies(["token"]);
+
   useEffect(() => {
     axios
-      .get(`${API_URL}/comments/${businessID.payload.id}`)
+      .get(`${API_URL}/comments`, {
+        headers: {
+          Authorization: "Bearer " + cookie.token,
+        },
+      })
       .then((res) => setData(res.data));
   }, []);
   return (

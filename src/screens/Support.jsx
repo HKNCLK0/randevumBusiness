@@ -1,18 +1,18 @@
 import axios from "axios";
 import { decodeJWT } from "did-jwt";
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { Footer } from "../components";
 import MainContainer from "../components/UI/MainContainer";
 import { API_URL } from "../config";
 
 //TODO:Mailin Gideceği E-Posta Açılacak
 const Support = () => {
-  const token = sessionStorage.getItem("token");
-  const business = decodeJWT(token);
+  const [cookie, setCookies] = useCookies(["token"]);
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [email, setEmail] = useState(business.payload.businessEmail);
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
   const [problemText, setProblemText] = useState("");
@@ -23,14 +23,22 @@ const Support = () => {
 
   const handleSubmit = () => {
     axios
-      .post(`${API_URL}/support`, {
-        name,
-        surname,
-        email,
-        phone,
-        selectedSubject,
-        problemText,
-      })
+      .post(
+        `${API_URL}/support`,
+        {
+          name,
+          surname,
+          email,
+          phone,
+          selectedSubject,
+          problemText,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + cookie.token,
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
         if (res.statusText === "OK") {
@@ -69,7 +77,6 @@ const Support = () => {
             <div className="flex gap-6 w-3/6 justify-between">
               <input
                 value={email}
-                disabled
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="E-Posta"
                 className="px-2 disabled:cursor-not-allowed py-2 w-full rounded-lg border-2 border-transparent focus:border-borderAndOtherRed transition-colors duration-200 outline-none font-semibold text-sm"

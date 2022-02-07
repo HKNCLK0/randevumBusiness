@@ -5,20 +5,15 @@ import axios from "axios";
 import { API_URL } from "../config";
 import { decodeJWT } from "did-jwt";
 import { Footer } from "../components";
+import { useCookies } from "react-cookie";
 
 //TODO:Kartların Navigasyonları Yapılacak
 
 const Subscription = () => {
-  const token = sessionStorage.getItem("token");
-  const business = decodeJWT(token);
+  const [cookie, setCookie] = useCookies(["token"]);
 
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/plans/${business.payload.businessPlanID}`)
-      .then((res) => setData(res.data));
-  }, []);
   return (
     <>
       <MainContainer>

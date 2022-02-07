@@ -5,12 +5,11 @@ import { Footer } from "../components";
 import { Box, MainContainer } from "../components/UI";
 import axios from "axios";
 import { API_URL } from "../config";
-import { decodeJWT } from "did-jwt";
+
+import { useCookies } from "react-cookie";
 
 const DateAndTimeSettings = () => {
-  const token = sessionStorage.getItem("token");
-
-  const business = decodeJWT(token);
+  const [cookie, setCookies] = useCookies(["token"]);
 
   const [selectedDay, setSelectedDay] = useState([]);
   const [inputTime, setInputTime] = useState("");
@@ -20,19 +19,33 @@ const DateAndTimeSettings = () => {
 
   const handleSetMeetDates = () => {
     axios
-      .put(`${API_URL}/businesses/setMeetsDates`, {
-        businessID: business.payload.id,
-        meetDates: selectedDay,
-      })
+      .put(
+        `${API_URL}/businesses/setMeetsDates`,
+        {
+          meetDates: selectedDay,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + cookie.token,
+          },
+        }
+      )
       .then((res) => console.log(res.data));
   };
 
   const handleSetMeetTimes = () => {
     axios
-      .put(`${API_URL}/businesses/setMeetsTimes`, {
-        businessID: business.payload.id,
-        meetTimes: selectedTime,
-      })
+      .put(
+        `${API_URL}/businesses/setMeetsTimes`,
+        {
+          meetTimes: selectedTime,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + cookie.token,
+          },
+        }
+      )
       .then((res) => console.log(res.data));
   };
 

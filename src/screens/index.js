@@ -12,6 +12,8 @@ import Register from "./Register";
 import Subscription from "./Subscription";
 import PaymentPage from "./PaymentPage";
 
+import Failed from "./Failed";
+
 export {
   Login,
   Register,
@@ -26,4 +28,5 @@ export {
   Comments,
   Subscription,
   PaymentPage,
+  Failed,
 };
