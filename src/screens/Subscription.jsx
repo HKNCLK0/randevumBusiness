@@ -3,7 +3,6 @@ import { Box, MainContainer } from "../components/UI";
 import { SubscriptionCards } from "../components/Subscritption";
 import axios from "axios";
 import { API_URL } from "../config";
-import { decodeJWT } from "did-jwt";
 import { Footer } from "../components";
 import { useCookies } from "react-cookie";
 

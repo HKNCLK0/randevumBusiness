@@ -13,6 +13,7 @@ import {
   TableSettings,
   PaymentPage,
   Failed,
+  Plan,
 } from "./screens";
 
 export const routes = [
@@ -71,5 +72,9 @@ export const routes = [
   {
     path: "/failed",
     element: <Failed />,
+  },
+  {
+    path: "/plan",
+    element: <Plan />,
   },
 ];

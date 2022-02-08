@@ -11,6 +11,7 @@ import Comments from "./Comments";
 import Register from "./Register";
 import Subscription from "./Subscription";
 import PaymentPage from "./PaymentPage";
+import Plan from "./Plan";
 
 import Failed from "./Failed";
 
@@ -29,4 +30,5 @@ export {
   Subscription,
   PaymentPage,
   Failed,
+  Plan,
 };

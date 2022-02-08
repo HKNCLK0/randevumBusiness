@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/UI/Button";
 
 import { useCookies } from "react-cookie";
+import { userPlan } from "../components/Data";
+import axios from "axios";
+import { API_URL } from "../config";
 
 //TODO:Tüm token ile girilen yerlere API'dan doğrulama yapılacak
 //TODO:Masa Ayarları Sayfası İşletmelere Göre Düzenlenebilir Olacak
@@ -13,9 +16,15 @@ const Dashboard = () => {
 
   const token = cookie.token;
 
+  const [data, setData] = useState([]);
+
   useEffect(() => {
     if (!token) {
       navigate("/");
+    } else if (!userPlan) {
+      navigate("/plan");
+    } else {
+      axios.get(`${API_URL}/panel`).then((res) => setData(res.data));
     }
   }, []);
   const handleLogout = () => {
@@ -34,11 +43,15 @@ const Dashboard = () => {
             Çıkış Yap
           </button>
         </div>
-        <div className="w-11/12 h-full gap-4 grid grid-cols-1 grid-rows-3 bg-boxColor p-4 rounded-xl">
-          <div className="grid grid-cols-3 grid-rows-1 gap-4">
-            <Button to="/dashboard/business-settings">
-              <h1 className="text-boxColor font-bold">İşletme Ayarları</h1>
+        <div className="w-11/12 h-full gap-4 grid grid-cols-3 grid-rows-3 bg-boxColor p-4 rounded-xl">
+          {data.map((buton) => (
+            <Button to={buton.panelURL}>
+              <h1 className="text-boxColor font-bold">{buton.panelTitle}</h1>
             </Button>
+          ))}
+
+          {/*<div className="grid grid-cols-3 grid-rows-1 gap-4">
+
             <Button to="/dashboard/subscription">
               <h1 className="text-boxColor font-bold">Abonelik</h1>
             </Button>
@@ -66,7 +79,7 @@ const Dashboard = () => {
             <Button to="/dashboard/support">
               <h1 className="text-boxColor font-bold">Destek</h1>
             </Button>
-          </div>
+  </div>*/}
         </div>
       </main>
     </>
