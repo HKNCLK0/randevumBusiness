@@ -8,14 +8,7 @@
 
     html,
     body {
-        @apply h-full bg-background
-    }
-}
-@layer base {
-
-    html,
-    body {
-        @apply antialiased
+        @apply antialiased h-full bg-background
     }
 }
 

@@ -24,7 +24,20 @@ const Dashboard = () => {
     } else if (!userPlan) {
       navigate("/plan");
     } else {
-      axios.get(`${API_URL}/panel`).then((res) => setData(res.data));
+      axios
+        .get(`${API_URL}/plans/get-level`, {
+          headers: {
+            Authorization: "Bearer " + cookie.token,
+          },
+        })
+        .then((res) => {
+          setData(res.data.panel);
+        })
+        .catch((err) =>
+          err.response.data == "Subscription Not Found"
+            ? navigate("/plan")
+            : console.log("Abone")
+        );
     }
   }, []);
   const handleLogout = () => {
@@ -44,42 +57,11 @@ const Dashboard = () => {
           </button>
         </div>
         <div className="w-11/12 h-full gap-4 grid grid-cols-3 grid-rows-3 bg-boxColor p-4 rounded-xl">
-          {data.map((buton) => (
-            <Button to={buton.panelURL}>
+          {data.map((buton, index) => (
+            <Button key={index} to={buton.panelURL}>
               <h1 className="text-boxColor font-bold">{buton.panelTitle}</h1>
             </Button>
           ))}
-
-          {/*<div className="grid grid-cols-3 grid-rows-1 gap-4">
-
-            <Button to="/dashboard/subscription">
-              <h1 className="text-boxColor font-bold">Abonelik</h1>
-            </Button>
-            <Button to="/dashboard/comments">
-              <h1 className="text-boxColor font-bold">Değerlendirmeler</h1>
-            </Button>
-          </div>
-          <div className="grid grid-cols-3 grid-rows-1 gap-4">
-            <Button to="/dashboard/meets">
-              <h1 className="text-boxColor font-bold">Randevular</h1>
-            </Button>
-            <Button to="/dashboard/photo-gallery">
-              <h1 className="text-boxColor font-bold">Resim Galerisi</h1>
-            </Button>
-            <Button to="/dashboard/table-settings">
-              <h1 className="text-boxColor font-bold">Masa Ayarları</h1>
-            </Button>
-          </div>
-          <div className="grid grid-cols-2 grid-rows-1 gap-4">
-            <Button to="/dashboard/date-time-settings">
-              <h1 className="text-boxColor font-bold">
-                Randevu Tarih / Saat Ayarları
-              </h1>
-            </Button>
-            <Button to="/dashboard/support">
-              <h1 className="text-boxColor font-bold">Destek</h1>
-            </Button>
-  </div>*/}
         </div>
       </main>
     </>
