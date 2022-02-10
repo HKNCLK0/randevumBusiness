@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/UI/Button";
 
 import { useCookies } from "react-cookie";
-import { userPlan } from "../components/Data";
 import axios from "axios";
 import { API_URL } from "../config";
 
@@ -17,13 +16,13 @@ const Dashboard = () => {
   const token = cookie.token;
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!token) {
       navigate("/");
-    } else if (!userPlan) {
-      navigate("/plan");
     } else {
+      setLoading(true);
       axios
         .get(`${API_URL}/plans/get-level`, {
           headers: {
@@ -31,6 +30,7 @@ const Dashboard = () => {
           },
         })
         .then((res) => {
+          setLoading(false);
           setData(res.data.panel);
         })
         .catch((err) =>
@@ -56,13 +56,27 @@ const Dashboard = () => {
             Çıkış Yap
           </button>
         </div>
-        <div className="w-11/12 h-full gap-4 grid grid-cols-3 grid-rows-3 bg-boxColor p-4 rounded-xl">
-          {data.map((buton, index) => (
-            <Button key={index} to={buton.panelURL}>
-              <h1 className="text-boxColor font-bold">{buton.panelTitle}</h1>
-            </Button>
-          ))}
-        </div>
+
+        {loading ? (
+          <div className="w-11/12 h-full gap-4 grid grid-cols-3 grid-rows-3 bg-boxColor p-4 rounded-xl">
+            <div className="bg-background duration-200 animate-pulse flex flex-col text-xl outline-none items-center justify-center rounded-lg " />
+            <div className="bg-background duration-200 animate-pulse flex flex-col text-xl outline-none items-center justify-center rounded-lg " />
+            <div className="bg-background duration-200 animate-pulse flex flex-col text-xl outline-none items-center justify-center rounded-lg " />
+            <div className="bg-background duration-200 animate-pulse flex flex-col text-xl outline-none items-center justify-center rounded-lg " />
+            <div className="bg-background duration-200 animate-pulse flex flex-col text-xl outline-none items-center justify-center rounded-lg " />
+            <div className="bg-background duration-200 animate-pulse flex flex-col text-xl outline-none items-center justify-center rounded-lg " />
+            <div className="bg-background duration-200 animate-pulse flex flex-col text-xl outline-none items-center justify-center rounded-lg " />
+            <div className="bg-background duration-200 animate-pulse flex flex-col text-xl outline-none items-center justify-center rounded-lg " />
+          </div>
+        ) : (
+          <div className="w-11/12 h-full gap-4 grid grid-cols-3 grid-rows-3 bg-boxColor p-4 rounded-xl">
+            {data.map((buton, index) => (
+              <Button key={index} to={buton.panelURL}>
+                <h1 className="text-boxColor font-bold">{buton.panelTitle}</h1>
+              </Button>
+            ))}
+          </div>
+        )}
       </main>
     </>
   );

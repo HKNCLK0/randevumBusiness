@@ -19,10 +19,9 @@ const Plan = () => {
           Authorization: "Bearer " + cookie.token,
         },
       })
-      .then((res) =>
-        res.data
-          ? navigate("/")
-          : axios.get(`${API_URL}/plans`).then((res) => setData(res.data.data))
+      .then((res) => res.data && navigate("/"))
+      .catch(() =>
+        axios.get(`${API_URL}/plans`).then((res) => setData(res.data.data))
       );
   }, []);
 
