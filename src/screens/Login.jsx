@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Loader, Footer } from "../components";
 import { API_URL } from "../config";
 
@@ -100,6 +100,12 @@ const Login = () => {
             {loading ? <Loader /> : "Giriş Yap"}
           </button>
         </div>
+        <Link
+          to="/register"
+          className="bg-boxColor font-bold text-center w-2/3 md:w-1/4 py-8 rounded-lg text-textColor text-sm transition-colors duration-200 hover:bg-textColor hover:text-boxColor"
+        >
+          Kayıt Olmak İçin Tıklayın
+        </Link>
       </main>
       <Footer />
     </>

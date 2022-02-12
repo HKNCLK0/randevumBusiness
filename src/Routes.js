@@ -14,6 +14,7 @@ import {
   PaymentPage,
   Failed,
   Plan,
+  ComingSoon,
 } from "./screens";
 
 export const routes = [
@@ -77,4 +78,8 @@ export const routes = [
     path: "/plan",
     element: <Plan />,
   },
+  {
+    path:"/coming-soon",
+    element:<ComingSoon/>
+  }
 ];

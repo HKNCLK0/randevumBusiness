@@ -44,8 +44,9 @@ const Register = () => {
       })
       .then((res) => {
         if (res.statusText === "OK") {
-          alert("Register Successfully");
-          navigate("/");
+          setTimeout(() => {
+            navigate("/")
+          },500)
         } else {
           alert("Please Check All Fields");
         }

@@ -6,7 +6,6 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { API_URL } from "../config";
 
-//TODO:Tüm token ile girilen yerlere API'dan doğrulama yapılacak
 //TODO:Masa Ayarları Sayfası İşletmelere Göre Düzenlenebilir Olacak
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -18,7 +17,8 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  //Subscription System
+  /*useEffect(() => {
     if (!token) {
       navigate("/");
     } else {
@@ -38,6 +38,18 @@ const Dashboard = () => {
             ? navigate("/plan")
             : console.log("Abone")
         );
+    }
+  }, []);*/
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    } else {
+      setLoading(true);
+      axios
+        .get(`${API_URL}/panel`)
+        .then((res) => setData(res.data))
+        .finally(setLoading(false));
     }
   }, []);
   const handleLogout = () => {
@@ -70,11 +82,42 @@ const Dashboard = () => {
           </div>
         ) : (
           <div className="w-11/12 h-full gap-4 grid grid-cols-3 grid-rows-3 bg-boxColor p-4 rounded-xl">
-            {data.map((buton, index) => (
-              <Button key={index} to={buton.panelURL}>
-                <h1 className="text-boxColor font-bold">{buton.panelTitle}</h1>
-              </Button>
-            ))}
+            {data
+              .map((buton, index) =>
+                buton.panelTitle == "Masa Ayarları" ? (
+                  <button
+                    className="cursor-not-allowed bg-disabledColor flex flex-col text-xl outline-none items-center justify-center rounded-lg"
+                    to=""
+                  >
+                    <h1 className="text-textColor font-bold">Yakında</h1>{" "}
+                  </button>
+                ) : (
+                  <Button
+                    className={`${
+                      buton.panelTitle === "Masa Ayarları"
+                        ? "cursor-not-allowed"
+                        : ""
+                    }`}
+                    key={index}
+                    to={
+                      buton.panelTitle === "Masa Ayarları" ? "" : buton.panelURL
+                    }
+                  >
+                    <h1 className="text-boxColor font-bold">
+                      {buton.panelTitle}
+                    </h1>
+                  </Button>
+                )
+              )
+              .reverse()}
+            <div className="grid col-span-2">
+              <button
+                className="cursor-not-allowed bg-disabledColor flex flex-col text-xl outline-none items-center justify-center rounded-lg"
+                to=""
+              >
+                <h1 className="text-textColor font-bold">Yakında</h1>
+              </button>
+            </div>
           </div>
         )}
       </main>

@@ -12,6 +12,7 @@ import Register from "./Register";
 import Subscription from "./Subscription";
 import PaymentPage from "./PaymentPage";
 import Plan from "./Plan";
+import ComingSoon from "./ComingSoon";
 
 import Failed from "./Failed";
 
@@ -31,4 +32,5 @@ export {
   PaymentPage,
   Failed,
   Plan,
+  ComingSoon
 };

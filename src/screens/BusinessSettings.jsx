@@ -6,7 +6,9 @@ const BusinessSettings = () => {
   return (
     <>
       <MainContainer title="İşletme Ayarları">
-        <Box></Box>
+        <Box className="">
+          
+        </Box>
       </MainContainer>
       <Footer />
     </>
