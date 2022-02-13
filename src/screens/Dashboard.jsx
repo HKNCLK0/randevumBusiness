@@ -10,7 +10,7 @@ import { API_URL } from "../config";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const [cookie, setCookies, removeCookie] = useCookies(["token"]);
+  const [cookie, setCookies, removeCookie] = useCookies(["businessToken"]);
 
   const token = cookie.token;
 
@@ -53,7 +53,7 @@ const Dashboard = () => {
     }
   }, []);
   const handleLogout = () => {
-    removeCookie("token");
+    removeCookie("businessToken");
     window.location.reload();
   };
   return (

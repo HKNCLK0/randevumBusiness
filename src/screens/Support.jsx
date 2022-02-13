@@ -1,5 +1,4 @@
 import axios from "axios";
-import { decodeJWT } from "did-jwt";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Footer } from "../components";

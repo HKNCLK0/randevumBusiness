@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie";
 //TODO:Kartların Navigasyonları Yapılacak
 
 const Subscription = () => {
-  const [cookie, setCookie] = useCookies(["token"]);
+  const [cookie, setCookie] = useCookies(["businessToken"]);
 
   const [data, setData] = useState([]);
 

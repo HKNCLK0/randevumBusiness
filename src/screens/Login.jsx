@@ -26,7 +26,7 @@ const Login = () => {
       })
       .then((res) => {
         if (res.data.token) {
-          setCookies("token", res.data.token, { maxAge: 360000 });
+          setCookies("token", res.data.token, { maxAge: 86000 });
           navigate("/dashboard");
         } else {
           alert("Please Check Email or Password");

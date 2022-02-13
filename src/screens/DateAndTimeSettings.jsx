@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/tr";
 import { Footer } from "../components";
@@ -9,7 +9,7 @@ import { API_URL } from "../config";
 import { useCookies } from "react-cookie";
 
 const DateAndTimeSettings = () => {
-  const [cookie, setCookies] = useCookies(["token"]);
+  const [cookie, setCookies] = useCookies(["businessToken"]);
 
   const [selectedDay, setSelectedDay] = useState([]);
   const [inputTime, setInputTime] = useState("");
@@ -48,6 +48,16 @@ const DateAndTimeSettings = () => {
       )
       .then((res) => console.log(res.data));
   };
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/businesses/business`, {
+        headers: {
+          Authorization: "Bearer " + cookie.token,
+        },
+      })
+      .then((res) => setSelectedTime(res.data[0].businessMeetTimes));
+  }, []);
 
   function getCurrentWeek(days) {
     var currentDate = moment();

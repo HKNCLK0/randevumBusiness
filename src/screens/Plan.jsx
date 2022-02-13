@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Plan = () => {
   const navigate = useNavigate();
-  const [cookie, setCookies] = useCookies(["token"]);
+  const [cookie, setCookies] = useCookies(["businessToken"]);
 
   const [data, setData] = useState([]);
 

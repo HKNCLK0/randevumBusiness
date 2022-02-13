@@ -7,7 +7,7 @@ import { useCookies } from "react-cookie";
 const PhotoGallery = () => {
   const storage = fire.storage();
 
-  const [cookie, setCookies] = useCookies(["token"]);
+  const [cookie, setCookies] = useCookies(["businessToken"]);
 
   const [file, setFile] = useState();
   const [images, setImages] = useState([]);

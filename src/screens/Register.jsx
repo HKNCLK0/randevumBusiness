@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
-  const token = sessionStorage.getItem("token");
+  const token = sessionStorage.getItem("businessToken");
   const [businessName, setBusinessName] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [email, setEmail] = useState("");
@@ -44,9 +44,8 @@ const Register = () => {
       })
       .then((res) => {
         if (res.statusText === "OK") {
-          setTimeout(() => {
-            navigate("/")
-          },500)
+          alert("Kayıt Başarılı!");
+          navigate("/");
         } else {
           alert("Please Check All Fields");
         }

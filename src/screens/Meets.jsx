@@ -8,7 +8,7 @@ import { API_URL } from "../config";
 //TODO:User Data İçine Yazılacak
 
 const Meets = () => {
-  const [cookie, setCookies] = useCookies(["token"]);
+  const [cookie, setCookies] = useCookies(["businessToken"]);
 
   const [data, setData] = useState([]);
   useEffect(() => {
