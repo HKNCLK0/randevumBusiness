@@ -4,8 +4,10 @@ import { API_URL } from "../config";
 import City from "../Citys";
 import İlce from "../İlce";
 import { useNavigate } from "react-router-dom";
+import fire from "../firebase";
 
 const Register = () => {
+  const storage = fire.storage();
   const navigate = useNavigate();
   const token = sessionStorage.getItem("businessToken");
   const [businessName, setBusinessName] = useState("");
@@ -18,15 +20,14 @@ const Register = () => {
   const [filteredIlce, setFilteredIlce] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedIlce, setSelectedIlce] = useState("");
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/category`)
-      .then((category) => setCategories(category.data));
-  }, []);
+
   useEffect(() => {
     if (token) {
       navigate("/dashboard");
     }
+    axios
+      .get(`${API_URL}/category`)
+      .then((category) => setCategories(category.data));
     setFilteredIlce(İlce.filter((a) => a.il_id === selectedCountry));
   }, [selectedCountry]);
 
@@ -38,6 +39,7 @@ const Register = () => {
         businessEmail: email,
         businessPassword: password,
         businessPhone: phone,
+        businessImage: imageURL,
         businessAddress: address,
         businessCountry: selectedCountry,
         businessIlce: selectedIlce,
@@ -50,6 +52,17 @@ const Register = () => {
           alert("Please Check All Fields");
         }
       });
+  };
+
+  const [file, setFile] = useState();
+  const [imageURL, setImageURL] = useState("");
+  const onFileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = storage.ref(`businessImages/${email}/`);
+    const fileRef = storageRef.child(file.name);
+    setFile(file);
+    await fileRef.put(file);
+    setImageURL(await fileRef.getDownloadURL());
   };
   return (
     <>
@@ -113,6 +126,20 @@ const Register = () => {
               placeholder="Telefon Numarası"
               className="w-full px-2 py-2 text-sm rounded-lg font-semibold outline-none"
             />
+          </div>
+          <div className=" w-3/5 h-[40px] flex gap-8 justify-around">
+            <label className="w-full flex items-center justify-center">
+              <h1 className="w-full h-full flex items-center justify-center text-textColor font-semibold text-sm cursor-pointer rounded-lg outline-dashed">
+                {file ? file.name : "Resim Ekle"}
+              </h1>
+              <input
+                id="file"
+                type="file"
+                onChange={onFileChange}
+                className="hidden"
+                name="files[]"
+              />
+            </label>
           </div>
           <div className=" w-3/5 h-20 flex gap-8 justify-around">
             <textarea

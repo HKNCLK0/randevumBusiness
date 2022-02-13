@@ -1,32 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import fire from "../firebase";
 import { Footer } from "../components";
 import { useCookies } from "react-cookie";
+import axios from "axios";
+import { API_URL } from "../config";
 
-//TODO:Amazon AWS Kurulacak
 const PhotoGallery = () => {
   const storage = fire.storage();
 
-  const [cookie, setCookies] = useCookies(["businessToken"]);
+  const [cookie, setCookies] = useCookies(["token"]);
 
   const [file, setFile] = useState();
   const [images, setImages] = useState([]);
 
-  const handleUpload = (e) => {
-    /*
-    e.preventDefault();
-    const ref = storage.ref(
-      `/businessImages/${business.payload.id}/${file.name}`
-    );
-    const uploadTask = ref.put(file);
-    uploadTask.on("state_changed", console.log, console.error, () => {
-      ref.getDownloadURL().then((url) => {
-        setFile(null);
-        setImages((prevImages) => [...prevImages, url]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/businesses/business`, {
+        headers: {
+          Authorization: "Bearer " + cookie.token,
+        },
+      })
+      .then((res) => {
+        setData(res.data[0]);
       });
-    });
-  */
+  }, []);
+
+  const onFileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = storage.ref(`businessImages/${data._id}/`);
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    console.log(await fileRef.getDownloadURL());
   };
+
   return (
     <>
       <main className="py-16 font-Montserrat flex flex-col gap-16 items-center">
@@ -35,11 +43,9 @@ const PhotoGallery = () => {
             İşletmeniz İçin Resimler Yükleyin
           </h1>
           <div className="w-3/4 gap-y-4 flex items-center justify-center flex-col rounded-xl bg-boxColor py-8">
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <input type="file" onChange={onFileChange} />
           </div>
-          <button className="text-textColor" onClick={(e) => handleUpload(e)}>
-            Yükle
-          </button>
+          <button className="text-textColor">Yükle</button>
         </div>
         <Footer />
       </main>
