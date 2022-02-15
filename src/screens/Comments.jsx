@@ -9,7 +9,7 @@ import { useCookies } from "react-cookie";
 const Comments = () => {
   const [data, setData] = useState([]);
 
-  const [cookie, setCookies] = useCookies(["businessToken"]);
+  const [cookie, setCookies] = useCookies(["token"]);
 
   useEffect(() => {
     axios

@@ -9,7 +9,7 @@ import fire from "../firebase";
 const Register = () => {
   const storage = fire.storage();
   const navigate = useNavigate();
-  const token = sessionStorage.getItem("businessToken");
+  const token = sessionStorage.getItem("token");
   const [businessName, setBusinessName] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [email, setEmail] = useState("");

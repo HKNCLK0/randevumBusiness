@@ -6,7 +6,7 @@ import { Box, MainContainer } from "../components/UI";
 import { API_URL } from "../config";
 
 const BusinessSettings = () => {
-  const [cookie, setCookies] = useCookies(["businessToken"]);
+  const [cookie, setCookies] = useCookies(["token"]);
 
   const [data, setData] = useState("");
 

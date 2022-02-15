@@ -9,7 +9,7 @@ import { API_URL } from "../config";
 import { useCookies } from "react-cookie";
 
 const DateAndTimeSettings = () => {
-  const [cookie, setCookies] = useCookies(["businessToken"]);
+  const [cookie, setCookies] = useCookies(["token"]);
 
   const [selectedDay, setSelectedDay] = useState([]);
   const [inputTime, setInputTime] = useState("");
