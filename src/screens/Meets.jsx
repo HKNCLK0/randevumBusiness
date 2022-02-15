@@ -13,7 +13,7 @@ const Meets = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get(`${API_URL}/meets/business`, {
+      .get(`${API_URL}/meets/business-meets`, {
         headers: {
           Authorization: "Bearer " + cookie.token,
         },
@@ -29,7 +29,7 @@ const Meets = () => {
               {data.map((meet) => (
                 <div
                   key={meet._id}
-                  className="flex flex-col items-center gap-2 font-semibold bg-background text-textColor font-Montserrat px-8 py-6 rounded-lg"
+                  className="flex flex-col items-center gap-2 text-center font-semibold bg-background text-textColor font-Montserrat px-8 py-6 rounded-lg"
                 >
                   <div className="w-16 h-16 rounded-full bg-red-50" />
                   {/*meet.userData.map((user) => (
@@ -39,7 +39,10 @@ const Meets = () => {
                   ))*/}
                   <h1>{meet.date}</h1>
                   <h1>{meet.clock}</h1>
-                  <button className="border-2 border-borderAndOtherRed px-4 py-2 rounded-lg text-sm font-semibold transition-colors hover:bg-textColor hover:border-transparent hover:text-boxColor">
+                  <button
+                    disabled
+                    className="disabled:cursor-not-allowed disabled:bg-disabledColor disabled:text-textColor disabled:border-transparent border-2 border-borderAndOtherRed px-4 py-2 rounded-lg text-sm font-semibold transition-colors hover:bg-textColor hover:border-transparent hover:text-boxColor"
+                  >
                     Detay
                   </button>
                 </div>

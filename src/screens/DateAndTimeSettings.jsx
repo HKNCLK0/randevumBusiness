@@ -30,7 +30,7 @@ const DateAndTimeSettings = () => {
           },
         }
       )
-      .then((res) => console.log(res.data));
+      .then((res) => alert("Yeni Randevu Tarihleriniz Kaydedilmiştir!"));
   };
 
   const handleSetMeetTimes = () => {
@@ -46,7 +46,7 @@ const DateAndTimeSettings = () => {
           },
         }
       )
-      .then((res) => console.log(res.data));
+      .then((res) => alert("Yeni Randevu Saatleriniz Kaydedilmiştir!"));
   };
 
   useEffect(() => {
