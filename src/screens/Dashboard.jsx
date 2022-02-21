@@ -85,32 +85,14 @@ const Dashboard = () => {
         ) : (
           <div className="w-11/12 h-full gap-4 grid grid-cols-3 grid-rows-3 bg-boxColor p-4 rounded-xl">
             {data
-              .map((buton, index) =>
-                buton.panelTitle == "Masa Ayarları" ? (
-                  <button
-                    className="cursor-not-allowed bg-disabledColor flex flex-col text-xl outline-none items-center justify-center rounded-lg"
-                    to=""
-                  >
-                    <h1 className="text-textColor font-bold">Yakında</h1>{" "}
-                  </button>
-                ) : (
-                  <Button
-                    className={`${
-                      buton.panelTitle === "Masa Ayarları"
-                        ? "cursor-not-allowed"
-                        : ""
-                    }`}
-                    key={index}
-                    to={
-                      buton.panelTitle === "Masa Ayarları" ? "" : buton.panelURL
-                    }
-                  >
-                    <h1 className="text-boxColor font-bold">
-                      {buton.panelTitle}
-                    </h1>
-                  </Button>
-                )
-              )
+              .map((buton, index) => (
+                <Button key={index} to={buton.panelURL}>
+                  <h1 className="text-boxColor font-bold">
+                    {buton.panelTitle}
+                  </h1>
+                </Button>
+              ))
+
               .reverse()}
             <div className="grid col-span-2">
               <button
