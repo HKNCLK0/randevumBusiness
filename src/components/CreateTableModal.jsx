@@ -40,29 +40,25 @@ const CreateTableModal = (props) => {
 
   const closeModal = () => {
     setIsOpen(false);
+    window.location.reload();
   };
   Modal.setAppElement("#root");
 
-  const [masaAdi, setMasaAdi] = useState("");
-  const [kisiSayisi, setKisiSayisi] = useState("");
+  const [tableName, setTableName] = useState("");
+  const [tablePeopleCount, setTablePeopleCount] = useState("");
   const [ozellik, setOzellik] = useState("");
-  const [masaOzellikleri, setMasaOzellikleri] = useState([]);
+  const [tableFeatures, setTableFeatures] = useState([]);
 
   const [success, setSuccess] = useState(false);
 
   const handleSave = () => {
-    console.log(masaAdi);
-    console.log(kisiSayisi);
-    console.log(masaOzellikleri);
     axios
       .post(
-        `${API_URL}/businesses/set-table`,
+        `${API_URL}/tables/create`,
         {
-          tableArray: {
-            masaAdi: masaAdi,
-            kisiSayisi: kisiSayisi,
-            masaOzellikleri: masaOzellikleri,
-          },
+          tableName,
+          tablePeopleCount,
+          tableFeatures,
         },
         {
           headers: {
@@ -78,10 +74,10 @@ const CreateTableModal = (props) => {
       });
   };
   const clearInputs = () => {
-    setMasaAdi("");
-    setKisiSayisi("");
+    setTableName("");
+    setTablePeopleCount("");
     setOzellik("");
-    setMasaOzellikleri("");
+    setTableFeatures("");
   };
   return (
     <Modal
@@ -105,15 +101,15 @@ const CreateTableModal = (props) => {
         </div>
         <div className="w-full flex flex-col items-center gap-4">
           <input
-            value={masaAdi}
-            onChange={(e) => setMasaAdi(e.target.value)}
+            value={tableName}
+            onChange={(e) => setTableName(e.target.value)}
             className="w-1/2 h-10 border-2 rounded-lg border-transparent transition-colors duration-200 focus:border-borderAndOtherRed outline-none text-sm px-2 font-semibold"
             placeholder="Masa Adı"
             type="text"
           />
           <input
-            value={kisiSayisi}
-            onChange={(e) => setKisiSayisi(e.target.value)}
+            value={tablePeopleCount}
+            onChange={(e) => setTablePeopleCount(e.target.value)}
             className="w-1/3 h-10 border-2 rounded-lg border-transparent transition-colors duration-200 focus:border-borderAndOtherRed outline-none text-sm px-2 font-semibold"
             placeholder="Kişi Sayısı"
             type="text"
@@ -127,16 +123,16 @@ const CreateTableModal = (props) => {
               type="text"
             />
             <button
-              onClick={() => setMasaOzellikleri([...masaOzellikleri, ozellik])}
+              onClick={() => setTableFeatures([...tableFeatures, ozellik])}
               className="text-sm border-2 border-borderAndOtherRed text-textColor font-semibold px-4 rounded-lg transition-colors duration-300 hover:border-transparent hover:bg-textColor hover:text-background"
             >
               Ekle
             </button>
           </div>
           <div className="pb-2">
-            {masaOzellikleri.length
-              ? masaOzellikleri.map((mappedOzellik) => (
-                  <div className="flex flex-col gap-1">
+            {tableFeatures.length
+              ? tableFeatures.map((mappedOzellik, index) => (
+                  <div key={index} className="flex flex-col gap-1">
                     <li className="text-textColor">{mappedOzellik}</li>
                   </div>
                 ))
@@ -152,7 +148,7 @@ const CreateTableModal = (props) => {
           Çıkış
         </button>
         <button
-          disabled={!masaAdi || !kisiSayisi || !masaOzellikleri.length}
+          disabled={!tableName || !tablePeopleCount || !tableFeatures.length}
           onClick={() => handleSave()}
           className="text-textColor disabled:bg-disabledColor disabled:border-transparent disabled:text-textColor disabled:cursor-not-allowed font-Montserrat font-medium text-base border-2 px-6 rounded-lg border-borderAndOtherRed hover:border-transparent transition-colors duration-300 hover:text-boxColor hover:bg-textColor py-2"
         >
