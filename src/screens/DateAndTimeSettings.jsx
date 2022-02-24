@@ -56,7 +56,10 @@ const DateAndTimeSettings = () => {
           Authorization: "Bearer " + cookie.token,
         },
       })
-      .then((res) => setSelectedTime(res.data[0].businessMeetTimes));
+      .then((res) => {
+        setSelectedDay(res.data[0].businessMeetDates);
+        setSelectedTime(res.data[0].businessMeetTimes);
+      });
   }, []);
 
   function getCurrentWeek(days) {
